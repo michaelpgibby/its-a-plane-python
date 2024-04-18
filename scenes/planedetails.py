@@ -3,6 +3,7 @@ from rgbmatrix import graphics
 from utilities.animator import Animator
 from setup import colours, fonts, screen
 from setup.colours import COLORS 
+from config import PLANE_DETAILS_COLOR
 
 # Setup
 # PLANE_DETAILS_COLOUR = colours.PINK
