@@ -34,7 +34,7 @@ class PlaneDetailsScene(object):
             PLANE_DISTANCE_FROM_TOP - PLANE_TEXT_HEIGHT,
             screen.WIDTH,
             screen.HEIGHT,
-            COLORS["BLACK'],
+            COLORS["BLACK"],
         )
 
         # Draw text
