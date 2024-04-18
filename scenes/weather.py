@@ -8,66 +8,15 @@ from rgbmatrix import graphics
 from utilities.animator import Animator
 from setup import colours, fonts, frames
 from setup.colours import COLORS
-from config import WEATHER_LOCATION
-import sys
-
-# Attempt to load config data
-try:
-    from config import OPENWEATHER_API_KEY
-
-except (ModuleNotFoundError, NameError, ImportError):
-    # If there's no config data
-    OPENWEATHER_API_KEY = None
-
-try:
-    from config import TEMPERATURE_UNITS
-
-except (ModuleNotFoundError, NameError, ImportError):
-    # If there's no config data
-    TEMPERATURE_UNITS = "metric"
-
-try:
-    from config import RAINFALL_ENABLED
-
-except (ModuleNotFoundError, NameError, ImportError):
-    # If there's no config data
-    RAINFALL_ENABLED = False
-
-if RAINFALL_ENABLED and OPENWEATHER_API_KEY:
-    print("Rainfall display does not yet work with Open Weather", file=sys.stderr)
-    RAINFALL_ENABLED = False
-
-# if TEMPERATURE_UNITS != "metric" and TEMPERATURE_UNITS != "imperial":
- #   TEMPERATURE_UNITS = "metric"
-TEMPERATURE_UNITS = "metric"
+from config import WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS, RAINFALL_ENABLED, RAINFALL_HOURS, \
+    RAINFAILL_12HR_MARKERS, RAINFALL_GRAPH_ORIGIN, RAINFALL_COLUMN_WIDTH, RAINFALL_GRAPH_HEIGHT, RAINFALL_MAX_VALUE, \
+    RAINFALL_OVERSPILL_FLASH_ENABLED, TEMPERATURE_REFRESH_SECONDS, TEMPERATURE_FONT, TEMPERATURE_FONT_HEIGHT, \
+    TEMPERATURE_POSITION, TEMPERATURE_COLOURS
 
 # Weather API
 WEATHER_API_URL = "https://taps-aff.co.uk/api/"
 OPENWEATHER_API_URL = "https://api.openweathermap.org/data/2.5/"
 
-
-# Scene Setup
-RAINFALL_REFRESH_SECONDS = 300
-RAINFALL_HOURS = 24
-RAINFAILL_12HR_MARKERS = True
-RAINFALL_GRAPH_ORIGIN = (39, 15)
-RAINFALL_COLUMN_WIDTH = 1
-RAINFALL_GRAPH_HEIGHT = 8
-RAINFALL_MAX_VALUE = 3  # mm
-RAINFALL_OVERSPILL_FLASH_ENABLED = True
-
-TEMPERATURE_REFRESH_SECONDS = 60
-TEMPERATURE_FONT = fonts.extrasmall
-TEMPERATURE_FONT_HEIGHT = 5
-TEMPERATURE_POSITION = (48, TEMPERATURE_FONT_HEIGHT + 1)
-
-TEMPERATURE_COLOURS = (
-    (0, COLORS['WHITE']),
-    (1, COLORS['BLUE_LIGHT']),
-    (8, COLORS['PINK_DARK']),
-    (18, COLORS['YELLOW']),
-    (30, COLORS['ORANGE']),
-)
 
 # Cache grabbing weather data
 @lru_cache()
@@ -82,7 +31,7 @@ def grab_weather(location, ttl_hash=None):
 
 
 def get_ttl_hash(seconds=60):
-    """Return the same value withing `seconds` time period"""
+    """Return the same value within `seconds` time period"""
     return round(time.time() / seconds)
 
 
@@ -96,12 +45,7 @@ def grab_current_temperature(location, units="metric"):
     except:
         pass
 
-  #  if units == "imperial":
-       # current_temp = (current_temp * (9.0 / 5.0)) + 32
-
-    # return current_temp
-
-imperial_temp = (current_temp * (9.0 / 5.0)) + 32
+    return current_temp
 
 
 def grab_upcoming_rainfall_and_temperature(location, hours):
@@ -164,7 +108,6 @@ class WeatherScene(object):
     def __init__(self):
         super().__init__()
         self._last_upcoming_rain_and_temp = None
-        self._last_temperature = None
         self._last_temperature_str = None
 
     def colour_gradient(self, colour_A, colour_B, ratio):
@@ -194,7 +137,7 @@ class WeatherScene(object):
         if current_temperature > max_temp:
             ratio = 1
         elif current_temperature > min_temp:
-            ratio = (current_temperature - min_temp) / max_temp
+            ratio = (current_temperature - min_temp) / (max_temp - min_temp)
         else:
             ratio = 0
 
@@ -263,6 +206,17 @@ class WeatherScene(object):
 
         if not RAINFALL_ENABLED:
             return
+
+        if not (count % TEMPERATURE_REFRESH_SECONDS):
+
+            if OPENWEATHER_API_KEY:
+                self.current_temperature = grab_current_temperature_openweather(
+                    WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS
+                )
+            else:
+                self.current_temperature = grab_current_temperature(
+                    WEATHER_LOCATION, TEMPERATURE_UNITS
+                )
 
         if len(self._data):
             # Don't draw if there's plane data
@@ -342,5 +296,4 @@ class WeatherScene(object):
                 temp_str,
             )
 
-            self._last_temperature = self.current_temperature
             self._last_temperature_str = temp_str
