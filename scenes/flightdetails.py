@@ -1,6 +1,7 @@
 from utilities.animator import Animator
 from setup import colours, fonts, screen
 from setup.colours import COLORS
+from config import FLIGHT_NUMBER_ALPHA_COLOR, FLIGHT_NUMBER_NUMERIC_COLOR, DIVIDING_BAR_COLOR, DATA_INDEX_COLOR
 
 from rgbmatrix import graphics
 
