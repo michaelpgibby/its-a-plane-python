@@ -4,6 +4,8 @@ from utilities.animator import Animator
 from setup import colours, fonts, frames
 from setup.colours import COLORS
 
+from config import CLOCK_COLOR
+
 from rgbmatrix import graphics
 
 # Setup
