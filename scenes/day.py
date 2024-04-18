@@ -2,11 +2,13 @@ from datetime import datetime
 
 from utilities.animator import Animator
 from setup import colours, fonts, frames
+from setup.colours import COLORS
 
 from rgbmatrix import graphics
 
 # Setup
-DAY_COLOUR = colours.PINK_DARK
+#DAY_COLOUR = colours.PINK_DARK
+DAY_COLOUR = COLORS.get(DAY_COLOR, COLORS['WHITE'])
 DAY_FONT = fonts.small
 DAY_POSITION = (2, 23)
 
