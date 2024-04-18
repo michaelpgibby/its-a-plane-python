@@ -9,24 +9,24 @@ with open('web_config.json', 'r') as config_file:
     config_data = json.load(config_file)
 
 COLORS_MAP = {
-    #"BLACK": colours.BLACK,
-    "BLACK": COLORS["BLACK"]
-    "WHITE": colours.WHITE,
-    "GREY": colours.GREY,
-    "YELLOW": colours.YELLOW,
-    "YELLOW_DARK": colours.YELLOW_DARK,
-    "BLUE": colours.BLUE,
-    "BLUE_LIGHT": colours.BLUE_LIGHT,
-    "BLUE_DARK": colours.BLUE_DARK,
-    "BLUE_DARKER": colours.BLUE_DARKER,
-    "PINK": colours.PINK,
-    "PINK_DARK": colours.PINK_DARK,
-    "PINK_DARKER": colours.PINK_DARKER,
-    "GREEN": colours.GREEN,
-    "ORANGE": colours.ORANGE,
-    "ORANGE_DARK": colours.ORANGE_DARK,
-    "RED": colours.RED,
-    "RED_LIGHT": colours.RED_LIGHT
+    "BLACK": COLORS["BLACK"],
+"WHITE": COLORS["WHITE"],
+"GREY": COLORS["GREY"],
+"YELLOW": COLORS["YELLOW"],
+"YELLOW_DARK": COLORS["YELLOW_DARK"],
+"BLUE": COLORS["BLUE"],
+"BLUE_LIGHT": COLORS["BLUE_LIGHT"],
+"BLUE_DARK": COLORS["BLUE_DARK"],
+"BLUE_DARKER": COLORS["BLUE_DARKER"],
+"PINK": COLORS["PINK"],
+"PINK_DARK": COLORS["PINK_DARK"],
+"PINK_DARKER": COLORS["PINK_DARKER"],
+"GREEN": COLORS["GREEN"],
+"ORANGE": COLORS["ORANGE"],
+"ORANGE_DARK": COLORS["ORANGE_DARK"],
+"RED": COLORS["RED"],
+"RED_LIGHT": COLORS["RED_LIGHT"]
+
 }
 
 ZONE_HOME = config_data['ZONE_HOME']
