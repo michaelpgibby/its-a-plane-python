@@ -14,7 +14,7 @@ def index():
 @app.route('/update_config', methods=['POST'])
 def update_config():
     if request.method == 'POST':
-   new_config = request.form.to_dict()
+       new_config = request.form.to_dict()
         # Convert specific values to their correct types
         new_config['ZONE_HOME'] = {
             'tl_y': float(new_config['ZONE_HOME[tl_y]']),
