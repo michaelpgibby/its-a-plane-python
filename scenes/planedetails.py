@@ -2,9 +2,11 @@ from rgbmatrix import graphics
 
 from utilities.animator import Animator
 from setup import colours, fonts, screen
+from setup.colours import COLORS 
 
 # Setup
-PLANE_DETAILS_COLOUR = colours.PINK
+# PLANE_DETAILS_COLOUR = colours.PINK
+PLANE_DETAILS_COLOUR = COLORS.get(PLANE_DETAILS_COLOR, COLORS['PINK']
 PLANE_DISTANCE_FROM_TOP = 30
 PLANE_TEXT_HEIGHT = 9
 PLANE_FONT = fonts.regular
