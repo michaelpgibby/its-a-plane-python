@@ -40,7 +40,7 @@ class DateScene(object):
                         DATE_FONT,
                         DATE_POSITION[0],
                         DATE_POSITION[1],
-                        colours.BLACK,
+                        COLORS["BLACK"],
                         self._last_date,
                     )
                 self._last_date = current_date
