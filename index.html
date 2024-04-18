@@ -7,8 +7,22 @@
     <h1>Configuration Editor</h1>
     <form action="/update_config" method="POST">
         {% for key, value in config.items() %}
-            <label for="{{ key }}">{{ key }}</label>
-            <input type="text" id="{{ key }}" name="{{ key }}" value="{{ value }}"><br>
+            {% if key == 'ZONE_HOME' %}
+                <h2>{{ key }}</h2>
+                {% for inner_key, inner_value in value.items() %}
+                    <label for="{{ inner_key }}">{{ inner_key }}</label>
+                    <input type="text" id="{{ inner_key }}" name="{{ key }}[{{ inner_key }}]" value="{{ inner_value }}"><br>
+                {% endfor %}
+            {% elif key == 'LOCATION_HOME' %}
+                <h2>{{ key }}</h2>
+                {% for i, inner_value in enumerate(value) %}
+                    <label for="location_{{ i }}">{{ i }}</label>
+                    <input type="text" id="location_{{ i }}" name="{{ key }}[{{ i }}]" value="{{ inner_value }}"><br>
+                {% endfor %}
+            {% else %}
+                <label for="{{ key }}">{{ key }}</label>
+                <input type="text" id="{{ key }}" name="{{ key }}" value="{{ value }}"><br>
+            {% endif %}
         {% endfor %}
         <input type="submit" value="Save Changes">
     </form>
