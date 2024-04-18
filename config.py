@@ -3,7 +3,7 @@
 import json
 from setup import colours
 from setup.colours import COLORS
-import fonts
+
 
 # Load configuration from web_config.json
 with open('web_config.json', 'r') as config_file:
@@ -62,7 +62,6 @@ RAINFALL_COLUMN_WIDTH = 1
 RAINFALL_GRAPH_HEIGHT = 8
 RAINFALL_MAX_VALUE = 3
 TEMPERATURE_REFRESH_SECONDS = config_data.get('TEMPERATURE_REFRESH_SECONDS', 60)
-TEMPERATURE_FONT = fonts.small  # Assuming you have defined fonts in your setup
 TEMPERATURE_FONT_HEIGHT =  5
 TEMPERATURE_POSITION = (48, TEMPERATURE_FONT_HEIGHT + 1)
 
