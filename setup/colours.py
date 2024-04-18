@@ -22,3 +22,6 @@ COLORS = {
     "RED": graphics.Color(255, 0, 0),
     "RED_LIGHT": graphics.Color(255, 195, 195)
 }
+
+def get(name, default=None):
+    return globals().get(name.upper(), default)
