@@ -7,6 +7,7 @@ from functools import lru_cache
 from rgbmatrix import graphics
 from utilities.animator import Animator
 from setup import colours, fonts, frames
+from setup.colours import COLORS
 from config import WEATHER_LOCATION
 import sys
 
@@ -36,8 +37,9 @@ if RAINFALL_ENABLED and OPENWEATHER_API_KEY:
     print("Rainfall display does not yet work with Open Weather", file=sys.stderr)
     RAINFALL_ENABLED = False
 
-if TEMPERATURE_UNITS != "metric" and TEMPERATURE_UNITS != "imperial":
-    TEMPERATURE_UNITS = "metric"
+# if TEMPERATURE_UNITS != "metric" and TEMPERATURE_UNITS != "imperial":
+ #   TEMPERATURE_UNITS = "metric"
+TEMPERATURE_UNITS = "metric"
 
 # Weather API
 WEATHER_API_URL = "https://taps-aff.co.uk/api/"
@@ -60,11 +62,11 @@ TEMPERATURE_FONT_HEIGHT = 5
 TEMPERATURE_POSITION = (48, TEMPERATURE_FONT_HEIGHT + 1)
 
 TEMPERATURE_COLOURS = (
-    (0, colours.WHITE),
-    (1, colours.BLUE_LIGHT),
-    (8, colours.PINK_DARK),
-    (18, colours.YELLOW),
-    (30, colours.ORANGE),
+    (0, COLORS['WHITE']),
+    (1, COLORS['BLUE_LIGHT']),
+    (8, COLORS['PINK_DARK']),
+    (18, COLORS['YELLOW']),
+    (30, COLORS['ORANGE']),
 )
 
 # Cache grabbing weather data
@@ -94,10 +96,12 @@ def grab_current_temperature(location, units="metric"):
     except:
         pass
 
-    if units == "imperial":
-        current_temp = (current_temp * (9.0 / 5.0)) + 32
+  #  if units == "imperial":
+       # current_temp = (current_temp * (9.0 / 5.0)) + 32
 
-    return current_temp
+    # return current_temp
+
+imperial_temp = (current_temp * (9.0 / 5.0)) + 32
 
 
 def grab_upcoming_rainfall_and_temperature(location, hours):
@@ -319,7 +323,7 @@ class WeatherScene(object):
                 TEMPERATURE_FONT,
                 TEMPERATURE_POSITION[0],
                 TEMPERATURE_POSITION[1],
-                colours.BLACK,
+                COLORS['BLACK'],
                 self._last_temperature_str,
             )
 
