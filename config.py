@@ -2,6 +2,7 @@
 
 import json
 from setup import colours
+from setup.colours import COLORS
 
 # Load configuration from web_config.json
 with open('web_config.json', 'r') as config_file:
