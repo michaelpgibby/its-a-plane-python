@@ -9,6 +9,10 @@ with open('web_config.json', 'r') as f:
 
 @app.route('/')
 def index():
+    # Debug print to check types of values in config_data
+    for key, value in config_data.items():
+        print(f"Key: {key}, Value: {type(value)}")
+
     return render_template('index.html', config=config_data)
 
 @app.route('/update_config', methods=['POST'])
@@ -46,5 +50,3 @@ def update_config():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
-
