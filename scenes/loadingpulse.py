@@ -1,10 +1,12 @@
 from utilities.animator import Animator
 from setup import colours
+from setup.colours import COLORS
 
 # Setup
 BLINKER_POSITION = (63, 0)
 BLINKER_STEPS = 10
-BLINKER_COLOUR = colours.WHITE
+# BLINKER_COLOUR = colours.WHITE
+BLINKER_COLOUR = COLORS['WHITE']
 
 
 class LoadingPulseScene(object):
