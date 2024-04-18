@@ -41,7 +41,7 @@ class ClockScene(object):
                         CLOCK_FONT,
                         CLOCK_POSITION[0],
                         CLOCK_POSITION[1],
-                        colours.BLACK,
+                        COLORS["BLACK"],
                         self._last_time,
                     )
                 self._last_time = current_time
