@@ -15,6 +15,13 @@ def index():
 def update_config():
     if request.method == 'POST':
         new_config = request.form.to_dict()
+        # Convert specific fields to integers if they exist
+        for key in ['brightness', 'min_altitude', 'gpio_slowdown']:
+            if key in new_config:
+                try:
+                    new_config[key] = int(new_config[key])
+                except ValueError:
+                    return f"Error: {key} must be an integer."
         # Update the config_data dictionary with the new values
         config_data.update(new_config)
         # Save the updated config back to web_config.json
@@ -24,3 +31,4 @@ def update_config():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+
