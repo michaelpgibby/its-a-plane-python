@@ -40,7 +40,7 @@ class DayScene(object):
                         DAY_FONT,
                         DAY_POSITION[0],
                         DAY_POSITION[1],
-                        colours.BLACK,
+                        COLORS["BLACK"],
                         self._last_day,
                     )
                 self._last_day = current_day
