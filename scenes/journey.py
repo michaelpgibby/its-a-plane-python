@@ -1,5 +1,6 @@
 from utilities.animator import Animator
 from setup import colours, fonts
+from setup.colours import COLORS
 
 from rgbmatrix import graphics
 
@@ -25,9 +26,11 @@ JOURNEY_WIDTH = 64
 JOURNEY_SPACING = 16
 JOURNEY_FONT = fonts.large
 JOURNEY_FONT_SELECTED = fonts.large_bold
-JOURNEY_COLOUR = colours.YELLOW
+# JOURNEY_COLOUR = colours.YELLOW
+# ARROW_COLOUR = colours.ORANGE
 
-ARROW_COLOUR = colours.ORANGE
+JOURNEY_COLOUR = COLORS.get(JOURNEY_COLOR, COLORS['YELLOW'])
+ARROW_COLOUR = COLORS.get(ARROW_COLOR, COLORS['ORANGE'])
 
 # Element Positions
 ARROW_POINT_POSITION = (34, 7)
@@ -54,7 +57,8 @@ class JourneyScene(object):
             JOURNEY_POSITION[1],
             JOURNEY_POSITION[0] + JOURNEY_WIDTH - 1,
             JOURNEY_POSITION[1] + JOURNEY_HEIGHT - 1,
-            colours.BLACK,
+            # colours.BLACK,
+            COLORS['BLACK'],
         )
 
         # Draw origin
@@ -91,7 +95,8 @@ class JourneyScene(object):
             ARROW_POINT_POSITION[1] - (ARROW_HEIGHT // 2),
             ARROW_POINT_POSITION[0],
             ARROW_POINT_POSITION[1] + (ARROW_HEIGHT // 2),
-            colours.BLACK,
+            # colours.BLACK,
+            COLORS['BLACK'],
         )
 
         # Starting positions for filled in arrow
