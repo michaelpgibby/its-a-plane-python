@@ -216,7 +216,7 @@ class WeatherScene(object):
                 y1 = RAINFALL_GRAPH_ORIGIN[1] - RAINFALL_GRAPH_HEIGHT
                 y2 = y1 + flash_height - 1
 
-                self.draw_square(x1, y1, x2, y2, colours.BLACK)
+                self.draw_square(x1, y1, x2, y2, COLORS["BLACK"])
 
     @Animator.KeyFrame.add(frames.PER_SECOND * 1)
     def rainfall(self, count):
@@ -255,7 +255,7 @@ class WeatherScene(object):
             if self._last_upcoming_rain_and_temp is not None:
                 # Undraw previous graph
                 self.draw_rainfall_and_temperature(
-                    self._last_upcoming_rain_and_temp, colours.BLACK
+                    self._last_upcoming_rain_and_temp, COLORS["BLACK"]
                 )
 
         if self.upcoming_rain_and_temp:
