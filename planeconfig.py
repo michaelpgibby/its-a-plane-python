@@ -30,18 +30,11 @@ def update_config():
         config_data.update(new_config)
 
         # Ensure the ZONE_HOME and LOCATION_HOME values are formatted correctly
-        if 'ZONE_HOME' in new_config:
-            new_config['ZONE_HOME'] = {
-                "tl_y": float(new_config['ZONE_HOME']['tl_y']),
-                "tl_x": float(new_config['ZONE_HOME']['tl_x']),
-                "br_y": float(new_config['ZONE_HOME']['br_y']),
-                "br_x": float(new_config['ZONE_HOME']['br_x'])
-            }
+        if 'ZONE_HOME' in new_config and isinstance(new_config['ZONE_HOME'], str):
+            new_config['ZONE_HOME'] = json.loads(new_config['ZONE_HOME'])
         
-        if 'LOCATION_HOME' in new_config:
-            new_config['LOCATION_HOME'] = [
-                float(coord) for coord in new_config['LOCATION_HOME']
-            ]
+        if 'LOCATION_HOME' in new_config and isinstance(new_config['LOCATION_HOME'], str):
+            new_config['LOCATION_HOME'] = json.loads(new_config['LOCATION_HOME'])
 
         # Save the updated config back to web_config.json
         with open('web_config.json', 'w') as f:
