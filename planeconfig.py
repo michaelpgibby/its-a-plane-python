@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='.')
 
 # Load the initial configuration from web_config.json
 with open('web_config.json', 'r') as f:
