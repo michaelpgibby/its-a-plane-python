@@ -16,9 +16,9 @@ def update_config():
     if request.method == 'POST':
         # Convert brightness, min_altitude, and gpio_slowdown to integers
         new_config = request.form.to_dict()
-        new_config['brightness'] = int(new_config.get('brightness', config_data['brightness']))
-        new_config['min_altitude'] = int(new_config.get('min_altitude', config_data['min_altitude']))
-        new_config['gpio_slowdown'] = int(new_config.get('gpio_slowdown', config_data['gpio_slowdown']))
+        new_config['BRIGHTNESS'] = int(new_config.get('BRIGHTNESS', config_data['BRIGHTNESS']))
+        new_config['MIN_ALTITUDE'] = int(new_config.get('MIN_ALTITUDE', config_data['MIN_ALTITUDE']))
+        new_config['GPIO_SLOWDOWN'] = int(new_config.get('GPIO_SLOWDOWN', config_data['GPIO_SLOWDOWN']))
 
         # Update the config_data dictionary with the new values
         config_data.update(new_config)
