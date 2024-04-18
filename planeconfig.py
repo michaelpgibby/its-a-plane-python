@@ -14,6 +14,22 @@ def index():
 @app.route('/update_config', methods=['POST'])
 def update_config():
     if request.method == 'POST':
+   new_config = request.form.to_dict()
+        # Convert specific values to their correct types
+        new_config['ZONE_HOME'] = {
+            'tl_y': float(new_config['ZONE_HOME[tl_y]']),
+            'tl_x': float(new_config['ZONE_HOME[tl_x]']),
+            'br_y': float(new_config['ZONE_HOME[br_y]']),
+            'br_x': float(new_config['ZONE_HOME[br_x]']),
+        }
+        new_config['LOCATION_HOME'] = [
+            float(new_config['LOCATION_HOME[0]']),
+            float(new_config['LOCATION_HOME[1]']),
+            float(new_config['LOCATION_HOME[2]']),
+        ]
+
+
+        
         # Convert brightness, min_altitude, and gpio_slowdown to integers
         new_config = request.form.to_dict()
         new_config['BRIGHTNESS'] = int(new_config.get('BRIGHTNESS', config_data['BRIGHTNESS']))
