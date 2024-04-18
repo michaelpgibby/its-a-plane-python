@@ -17,6 +17,7 @@ from config import WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS, RAI
 WEATHER_API_URL = "https://taps-aff.co.uk/api/"
 OPENWEATHER_API_URL = "https://api.openweathermap.org/data/2.5/"
 
+TEMPERATURE_FONT = fonts.small
 
 # Cache grabbing weather data
 @lru_cache()
