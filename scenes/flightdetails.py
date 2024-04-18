@@ -1,5 +1,6 @@
 from utilities.animator import Animator
 from setup import colours, fonts, screen
+from setup.colours import COLORS
 
 from rgbmatrix import graphics
 
@@ -11,15 +12,21 @@ FLIGHT_NO_POSITION = (1, 21)
 FLIGHT_NO_TEXT_HEIGHT = 8  # based on font size
 FLIGHT_NO_FONT = fonts.small
 
-FLIGHT_NUMBER_ALPHA_COLOUR = colours.BLUE
-FLIGHT_NUMBER_NUMERIC_COLOUR = colours.BLUE_LIGHT
+# FLIGHT_NUMBER_ALPHA_COLOUR = colours.BLUE
+# FLIGHT_NUMBER_NUMERIC_COLOUR = colours.BLUE_LIGHT
+
+FLIGHT_NUMBER_ALPHA_COLOUR = COLORS.get(FLIGHT_NUMBER_ALPHA_COLOR, COLORS['WHITE'])
+FLIGHT_NUMBER_NUMERIC_COLOUR = COLORS.get(FLIGHT_NUMBER_NUMERIC_COLOR, COLORS['WHITE'])
 
 DATA_INDEX_POSITION = (52, 21)
 DATA_INDEX_TEXT_HEIGHT = 6
 DATA_INDEX_FONT = fonts.extrasmall
 
-DIVIDING_BAR_COLOUR = colours.GREEN
-DATA_INDEX_COLOUR = colours.GREY
+# DIVIDING_BAR_COLOUR = colours.GREEN
+# DATA_INDEX_COLOUR = colours.GREY
+
+DIVIDING_BAR_COLOUR = COLORS.get(DIVIDING_BAR_COLOR, COLORS['BLUE'])
+DATA_INDEX_COLOUR = COLORS.get(DATA_INDEX_COLOR, COLORS['GREY'])
 
 
 class FlightDetailsScene(object):
@@ -39,7 +46,8 @@ class FlightDetailsScene(object):
             BAR_STARTING_POSITION[1] - (FLIGHT_NO_TEXT_HEIGHT // 2),
             screen.WIDTH - 1,
             BAR_STARTING_POSITION[1] + (FLIGHT_NO_TEXT_HEIGHT // 2),
-            colours.BLACK,
+           # colours.BLACK, 
+            COLORS['BLACK'],
         )
 
         # Draw flight number if available
@@ -71,7 +79,8 @@ class FlightDetailsScene(object):
                 BAR_STARTING_POSITION[1] - (FLIGHT_NO_TEXT_HEIGHT // 2),
                 screen.WIDTH,
                 BAR_STARTING_POSITION[1] + (FLIGHT_NO_TEXT_HEIGHT // 2),
-                colours.BLACK,
+               # colours.BLACK,
+                COLORS['BLACK'],
             )
 
             # Dividing bar
