@@ -1,6 +1,7 @@
 from utilities.animator import Animator
 from setup import colours, fonts
 from setup.colours import COLORS
+from config import JOURNEY_COLOR, ARROW_COLOR
 
 from rgbmatrix import graphics
 
