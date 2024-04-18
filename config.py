@@ -9,7 +9,8 @@ with open('web_config.json', 'r') as config_file:
     config_data = json.load(config_file)
 
 COLORS_MAP = {
-    "BLACK": colours.BLACK,
+    #"BLACK": colours.BLACK,
+    "BLACK": COLORS["BLACK"]
     "WHITE": colours.WHITE,
     "GREY": colours.GREY,
     "YELLOW": colours.YELLOW,
