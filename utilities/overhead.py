@@ -41,8 +41,8 @@ def distance_from_flight_to_home(flight, home=LOCATION_DEFAULT):
         lat = float(lat)
         long = float(long)
         alt = float(alt)
-        print(f"Latitude type: {type(lat)}, Longitude type: {type(long)}, Altitude type: {type(alt)}")
-        print(f"Latitude: {lat}, Longitude: {long}, Altitude: {alt}")
+        #print(f"Latitude type: {type(lat)}, Longitude type: {type(long)}, Altitude type: {type(alt)}")
+        #print(f"Latitude: {lat}, Longitude: {long}, Altitude: {alt}")
         return [
             alt * math.cos(DEG2RAD * lat) * math.sin(DEG2RAD * long),
             alt * math.sin(DEG2RAD * lat),
