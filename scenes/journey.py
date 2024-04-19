@@ -30,8 +30,8 @@ JOURNEY_FONT_SELECTED = fonts.large_bold
 # JOURNEY_COLOUR = colours.YELLOW
 # ARROW_COLOUR = colours.ORANGE
 
-JOURNEY_COLOUR = COLORS.get(JOURNEY_COLOR, COLORS["YELLOW"])
-ARROW_COLOUR = COLORS.get(ARROW_COLOR, COLORS["ORANGE"])
+JOURNEY_COLOUR = COLORS.get(JOURNEY_COLOR, COLORS['YELLOW'])
+ARROW_COLOUR = COLORS.get(ARROW_COLOR, COLORS['ORANGE'])
 
 # Element Positions
 ARROW_POINT_POSITION = (34, 7)
@@ -42,12 +42,6 @@ ARROW_HEIGHT = 8
 class JourneyScene(object):
     def __init__(self):
         super().__init__()
-        self._journey_colour = COLORS.get(JOURNEY_COLOR, COLORS["YELLOW"])
-        self._arrow_colour = COLORS.get(ARROW_COLOR, COLORS["ORANGE"])
-
-    def set_journey_colors(self, journey_colour, arrow_colour):
-        self._journey_colour = journey_colour
-        self._arrow_colour = arrow_colour
 
     @Animator.KeyFrame.add(0)
     def journey(self):
@@ -64,7 +58,8 @@ class JourneyScene(object):
             JOURNEY_POSITION[1],
             JOURNEY_POSITION[0] + JOURNEY_WIDTH - 1,
             JOURNEY_POSITION[1] + JOURNEY_HEIGHT - 1,
-            COLORS["BLACK"],
+            # colours.BLACK,
+            COLORS['BLACK'],
         )
 
         # Draw origin
@@ -73,7 +68,7 @@ class JourneyScene(object):
             JOURNEY_FONT_SELECTED if origin == JOURNEY_CODE_SELECTED else JOURNEY_FONT,
             1,
             JOURNEY_HEIGHT,
-            self._journey_colour,
+            JOURNEY_COLOUR,
             origin if origin else JOURNEY_BLANK_FILLER,
         )
 
@@ -85,7 +80,7 @@ class JourneyScene(object):
             else JOURNEY_FONT,
             text_length + JOURNEY_SPACING,
             JOURNEY_HEIGHT,
-            self._journey_colour,
+            JOURNEY_COLOUR,
             destination if destination else JOURNEY_BLANK_FILLER,
         )
 
@@ -101,10 +96,11 @@ class JourneyScene(object):
             ARROW_POINT_POSITION[1] - (ARROW_HEIGHT // 2),
             ARROW_POINT_POSITION[0],
             ARROW_POINT_POSITION[1] + (ARROW_HEIGHT // 2),
-            COLORS["BLACK"],
+            # colours.BLACK,
+            COLORS['BLACK'],
         )
 
-        # Starting positions for filled-in arrow
+        # Starting positions for filled in arrow
         x = ARROW_POINT_POSITION[0] - ARROW_WIDTH
         y1 = ARROW_POINT_POSITION[1] - (ARROW_HEIGHT // 2)
         y2 = ARROW_POINT_POSITION[1] + (ARROW_HEIGHT // 2)
@@ -113,9 +109,9 @@ class JourneyScene(object):
         self.canvas.SetPixel(
             ARROW_POINT_POSITION[0],
             ARROW_POINT_POSITION[1],
-            self._arrow_colour.red,
-            self._arrow_colour.green,
-            self._arrow_colour.blue,
+            ARROW_COLOUR.red,
+            ARROW_COLOUR.green,
+            ARROW_COLOUR.blue,
         )
 
         # Draw using columns
@@ -126,11 +122,10 @@ class JourneyScene(object):
                 y1,
                 x,
                 y2,
-                self._arrow_colour,
+                ARROW_COLOUR,
             )
 
             # Calculate next column's data
             x += 1
             y1 += 1
             y2 -= 1
-
