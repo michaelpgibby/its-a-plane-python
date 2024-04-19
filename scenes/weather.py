@@ -241,4 +241,3 @@ class WeatherScene(object):
             self._last_temperature_str_c = temp_str_c
 
     # Other methods here...
-
