@@ -18,6 +18,10 @@ class DayScene(object):
     def __init__(self):
         super().__init__()
         self._last_day = None
+        self._day_colour = COLORS.get(DAY_COLOR, COLORS['WHITE'])  # Added dynamic color attribute
+
+    def set_day_color(self, color):
+        self._day_colour = color
 
     @Animator.KeyFrame.add(frames.PER_SECOND * 1)
     def day(self, count):
@@ -45,12 +49,12 @@ class DayScene(object):
                     )
                 self._last_day = current_day
 
-                # Draw day
+                # Draw day with dynamically set color
                 _ = graphics.DrawText(
                     self.canvas,
                     DAY_FONT,
                     DAY_POSITION[0],
                     DAY_POSITION[1],
-                    DAY_COLOUR,
+                    self._day_colour,
                     current_day,
                 )
