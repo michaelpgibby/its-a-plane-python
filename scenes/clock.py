@@ -7,7 +7,7 @@ from setup import colours, fonts, frames
 from setup.colours import COLORS 
 from config import COLORS_MAP 
 
-# from config import CLOCK_COLOR
+from config import CLOCK_COLOR
 
 with open('web_config.json', 'r') as config_file:
     config_data = json.load(config_file)
