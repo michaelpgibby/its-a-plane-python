@@ -13,8 +13,7 @@ from scenes.clock import ClockScene
 from scenes.planedetails import PlaneDetailsScene
 from scenes.day import DayScene
 from scenes.date import DateScene
-from config import RGB_SEQUENCE, COLORS_MAP
-from setup.colours import COLORS
+from config import RGB_SEQUENCE
 
 
 from rgbmatrix import graphics
