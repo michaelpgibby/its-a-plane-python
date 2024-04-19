@@ -18,6 +18,10 @@ class PlaneDetailsScene(object):
         super().__init__()
         self.plane_position = screen.WIDTH
         self._data_all_looped = False
+        self._plane_details_colour = COLORS.get(PLANE_DETAILS_COLOR, COLORS['PINK'])
+
+    def set_plane_details_color(self, colour):
+        self._plane_details_colour = colour
 
     @Animator.KeyFrame.add(1)
     def plane_details(self, count):
@@ -43,7 +47,7 @@ class PlaneDetailsScene(object):
             PLANE_FONT,
             self.plane_position,
             PLANE_DISTANCE_FROM_TOP,
-            PLANE_DETAILS_COLOUR,
+            self._plane_details_colour,
             plane,
         )
 
@@ -59,3 +63,4 @@ class PlaneDetailsScene(object):
     @Animator.KeyFrame.add(0)
     def reset_scrolling(self):
         self.plane_position = screen.WIDTH
+
