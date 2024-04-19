@@ -8,7 +8,7 @@ from config import DAY_COLOR
 from rgbmatrix import graphics
 
 # Setup
-# DAY_COLOUR = colours.PINK_DARK
+#DAY_COLOUR = colours.PINK_DARK
 DAY_COLOUR = COLORS.get(DAY_COLOR, COLORS['WHITE'])
 DAY_FONT = fonts.small
 DAY_POSITION = (2, 23)
@@ -18,10 +18,6 @@ class DayScene(object):
     def __init__(self):
         super().__init__()
         self._last_day = None
-        self._day_colour = COLORS.get(DAY_COLOR, COLORS['WHITE'])  # Added dynamic color attribute
-
-    def set_day_color(self, color):
-        self._day_colour = color
 
     @Animator.KeyFrame.add(frames.PER_SECOND * 1)
     def day(self, count):
@@ -35,7 +31,7 @@ class DayScene(object):
             now = datetime.now()
             current_day = now.strftime("%A")
 
-            # Only draw if day needs updated
+            # Only draw if time needs updated
             if self._last_day != current_day:
                 # Undraw last day if different from current
                 if not self._last_day is None:
@@ -49,12 +45,12 @@ class DayScene(object):
                     )
                 self._last_day = current_day
 
-                # Draw day with dynamically set color
+                # Draw day
                 _ = graphics.DrawText(
                     self.canvas,
                     DAY_FONT,
                     DAY_POSITION[0],
                     DAY_POSITION[1],
-                    self._day_colour,
+                    DAY_COLOUR,
                     current_day,
                 )
