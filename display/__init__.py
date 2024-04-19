@@ -14,6 +14,7 @@ from scenes.planedetails import PlaneDetailsScene
 from scenes.day import DayScene
 from scenes.date import DateScene
 from config import RGB_SEQUENCE
+
 from rgbmatrix import graphics
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
@@ -47,6 +48,7 @@ try:
 except (ModuleNotFoundError, NameError, ImportError):
     # If there's no experimental config data
     LOADING_LED_ENABLED = False
+
 
 class Display(
     WeatherScene,
@@ -92,17 +94,12 @@ class Display(
         self.overhead = Overhead()
         self.overhead.grab_data()
 
-       
-
         # Initalise animator and scenes
         super().__init__()
 
         # Overwrite any default settings from
         # Animator or Scenes
         self.delay = frames.PERIOD
-
-    # Other methods remain unchanged...
-
 
     def draw_square(self, x0, y0, x1, y1, colour):
         for x in range(x0, x1):
@@ -172,5 +169,3 @@ class Display(
         except KeyboardInterrupt:
             print("Exiting\n")
             sys.exit(0)
-            
-            
