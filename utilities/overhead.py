@@ -38,6 +38,8 @@ except (ModuleNotFoundError, NameError, ImportError):
 def distance_from_flight_to_home(flight, home=LOCATION_DEFAULT):
     def polar_to_cartesian(lat, long, alt):
         DEG2RAD = math.pi / 180
+        print(f"Latitude type: {type(lat)}, Longitude type: {type(long)}, Altitude type: {type(alt)}")
+        print(f"Latitude: {lat}, Longitude: {long}, Altitude: {alt}")
         return [
             alt * math.cos(DEG2RAD * lat) * math.sin(DEG2RAD * long),
             alt * math.sin(DEG2RAD * lat),
