@@ -49,12 +49,11 @@ except (ModuleNotFoundError, NameError, ImportError):
     # If there's no experimental config data
     LOADING_LED_ENABLED = False
 
-
 class Display(
     WeatherScene,
     FlightDetailsScene,
     JourneyScene,
-    LoadingLEDScene if LOADING_LED_ENABLED else LoadingPulseScene ,
+    LoadingLEDScene if LOADING_LED_ENABLED else LoadingPulseScene,
     PlaneDetailsScene,
     ClockScene,
     DayScene,
@@ -94,12 +93,28 @@ class Display(
         self.overhead = Overhead()
         self.overhead.grab_data()
 
+        # Initialize color attributes
+        self._airport_colour = AIRPORT_COLOR
+        self._arrow_colour = ARROW_COLOR
+        self._plane_details_colour = PLANE_DETAILS_COLOR
+        self._clock_colour = CLOCK_COLOR
+        self._date_colour = DATE_COLOR
+        self._day_colour = DAY_COLOR
+        self._flight_number_alpha_colour = FLIGHT_NUMBER_ALPHA_COLOR
+        self._flight_number_numeric_colour = FLIGHT_NUMBER_NUMERIC_COLOR
+        self._dividing_bar_colour = DIVIDING_BAR_COLOR
+        self._data_index_colour = DATA_INDEX_COLOR
+        self._journey_colour = JOURNEY_COLOR
+
         # Initalise animator and scenes
         super().__init__()
 
         # Overwrite any default settings from
         # Animator or Scenes
         self.delay = frames.PERIOD
+
+    # Other methods remain unchanged...
+
 
     def draw_square(self, x0, y0, x1, y1, colour):
         for x in range(x0, x1):
