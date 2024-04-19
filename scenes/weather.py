@@ -277,56 +277,56 @@ class WeatherScene(object):
 
     @Animator.KeyFrame.add(frames.PER_SECOND * 1)
     def temperature(self, count):
-    if len(self._data):
+        if len(self._data):
         # Don't draw if there's plane data
-        return
+            return
 
-    if not (count % TEMPERATURE_REFRESH_SECONDS):
+        if not (count % TEMPERATURE_REFRESH_SECONDS):
 
-        if OPENWEATHER_API_KEY:
+            if OPENWEATHER_API_KEY:
             self.current_temperature = grab_current_temperature_openweather(
                 WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS
-            )
-        else:
+                )
+            else:
             self.current_temperature = grab_current_temperature(
                 WEATHER_LOCATION, TEMPERATURE_UNITS
+                )
+
+        if self._last_temperature_str is not None:
+        # Undraw old temperature
+            _ = graphics.DrawText(
+                self.canvas,
+                TEMPERATURE_FONT,
+                TEMPERATURE_POSITION[0],
+                TEMPERATURE_POSITION[1],
+                COLORS["BLACK"],
+                self._last_temperature_str,
             )
 
-    if self._last_temperature_str is not None:
-        # Undraw old temperature
-        _ = graphics.DrawText(
-            self.canvas,
-            TEMPERATURE_FONT,
-            TEMPERATURE_POSITION[0],
-            TEMPERATURE_POSITION[1],
-            COLORS["BLACK"],
-            self._last_temperature_str,
-        )
+        if self.current_temperature:
+            temp_str_c = f"{round(self.current_temperature)}°C".rjust(4, " ")
+            temp_str_f = f"{round(self.current_temperature * 9 / 5 + 32)}°F".rjust(4, " ")
 
-    if self.current_temperature:
-        temp_str_c = f"{round(self.current_temperature)}°C".rjust(4, " ")
-        temp_str_f = f"{round(self.current_temperature * 9 / 5 + 32)}°F".rjust(4, " ")
+            temp_colour = self.temperature_to_colour(self.current_temperature)
 
-        temp_colour = self.temperature_to_colour(self.current_temperature)
+            # Draw temperature in Celsius
+            _ = graphics.DrawText(
+                self.canvas,
+                TEMPERATURE_FONT,
+                TEMPERATURE_POSITION[0],
+                TEMPERATURE_POSITION[1],
+                temp_colour,
+                temp_str_c,
+            )
 
-        # Draw temperature in Celsius
-        _ = graphics.DrawText(
-            self.canvas,
-            TEMPERATURE_FONT,
-            TEMPERATURE_POSITION[0],
-            TEMPERATURE_POSITION[1],
-            temp_colour,
-            temp_str_c,
-        )
+            # Draw temperature in Fahrenheit
+            _ = graphics.DrawText(
+                self.canvas,
+                TEMPERATURE_FONT,
+                TEMPERATURE_POSITION[0] + 10,
+                TEMPERATURE_POSITION[1],
+                temp_colour,
+                temp_str_f,
+            )
 
-        # Draw temperature in Fahrenheit
-        _ = graphics.DrawText(
-            self.canvas,
-            TEMPERATURE_FONT,
-            TEMPERATURE_POSITION[0] + 10,
-            TEMPERATURE_POSITION[1],
-            temp_colour,
-            temp_str_f,
-        )
-
-        self._last_temperature_str = temp_str_c  # Or temp_str_f, depending on your preference
+            self._last_temperature_str = temp_str_c  # Or temp_str_f, depending on your preference
