@@ -4,7 +4,10 @@ from utilities.animator import Animator
 from setup import colours, fonts, frames
 from setup.colours import COLORS
 
-from config import CLOCK_COLOR
+# from config import CLOCK_COLOR
+
+with open('web_config.json', 'r') as config_file
+    config_data = json.load(config_file)
 
 from rgbmatrix import graphics
 
@@ -12,7 +15,8 @@ from rgbmatrix import graphics
 CLOCK_FONT = fonts.regular
 CLOCK_POSITION = (1, 8)
 # CLOCK_COLOUR = colours.BLUE_DARK
-CLOCK_COLOUR = COLORS.get(CLOCK_COLOR, COLORS['WHITE'])
+#CLOCK_COLOUR = COLORS.get(CLOCK_COLOR, COLORS['WHITE'])
+CLOCK_COLOR = COLORS_MAP.get(config_data['CLOCK_COLOR'], COLORS["PINK"])
 print(f"CLOCK_COLOR: {CLOCK_COLOR}")
 
 
