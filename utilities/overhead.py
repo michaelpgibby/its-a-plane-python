@@ -48,12 +48,7 @@ def distance_from_flight_to_home(flight, home=LOCATION_DEFAULT):
 
     (x, y, z) = polar_to_cartesian(flight.latitude, flight.longitude, flight.altitude)
     return math.sqrt(x**2 + y**2 + z**2)
-    
-class Flight:
-    def __init__(self, latitude, longitude, altitude):
-        self.latitude = latitude
-        self.longitude = longitude
-        self.altitude = altitude
+
 
     def feet_to_meters_plus_earth(altitude_ft):
         altitude_km = 0.0003048 * altitude_ft
@@ -75,7 +70,12 @@ class Flight:
     except AttributeError:
         # on error say it's far away
         return 1e6
-
+        
+class Flight:
+    def __init__(self, latitude, longitude, altitude):
+        self.latitude = latitude
+        self.longitude = longitude
+        self.altitude = altitude
 
 class Overhead:
     def __init__(self):
