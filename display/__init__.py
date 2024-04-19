@@ -23,7 +23,7 @@ from config import (RGB_SEQUENCE,
     FLIGHT_NUMBER_NUMERIC_COLOR,
     DIVIDING_BAR_COLOR,
     DATA_INDEX_COLOR,
-    JOURNEY_COLOR
+    JOURNEY_COLOR,
 )
 
 from rgbmatrix import graphics
