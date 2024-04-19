@@ -18,6 +18,10 @@ class DateScene(object):
     def __init__(self):
         super().__init__()
         self._last_date = None
+        self._date_colour = COLORS.get(DATE_COLOR, COLORS['WHITE'])  # Added dynamic color attribute
+
+    def set_date_color(self, color):
+        self._date_colour = color
 
     @Animator.KeyFrame.add(frames.PER_SECOND * 1)
     def date(self, count):
@@ -45,12 +49,13 @@ class DateScene(object):
                     )
                 self._last_date = current_date
 
-                # Draw date
+                # Draw date with dynamically set color
                 _ = graphics.DrawText(
                     self.canvas,
                     DATE_FONT,
                     DATE_POSITION[0],
                     DATE_POSITION[1],
-                    DATE_COLOUR,
+                    self._date_colour,
                     current_date,
                 )
+
