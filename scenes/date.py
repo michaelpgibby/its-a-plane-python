@@ -54,5 +54,3 @@ class DateScene(object):
                     DATE_COLOUR,
                     current_date,
                 )
-
-
