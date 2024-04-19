@@ -8,7 +8,7 @@ from config import DATE_COLOR
 from rgbmatrix import graphics
 
 # Setup
-#DATE_COLOUR = colours.PINK_DARKER
+# DATE_COLOUR = colours.PINK_DARKER
 DATE_COLOUR = COLORS.get(DATE_COLOR, COLORS['WHITE'])
 DATE_FONT = fonts.small
 DATE_POSITION = (1, 31)
