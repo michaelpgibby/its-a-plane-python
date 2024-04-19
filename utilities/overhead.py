@@ -3,9 +3,8 @@ from threading import Thread, Lock
 from time import sleep
 import math
 
-from requests.exceptions import ConnectionError
-from urllib3.exceptions import NewConnectionError
-from urllib3.exceptions import MaxRetryError
+from requests.exceptions import ConnectionError, RequestException
+from urllib3.exceptions import NewConnectionError, MaxRetryError
 
 try:
     # Attempt to load config data
@@ -38,6 +37,10 @@ except (ModuleNotFoundError, NameError, ImportError):
 def distance_from_flight_to_home(flight, home=LOCATION_DEFAULT):
     def polar_to_cartesian(lat, long, alt):
         DEG2RAD = math.pi / 180
+        # Convert latitude, longitude, and altitude to float
+        lat = float(lat)
+        long = float(long)
+        alt = float(alt)
         print(f"Latitude type: {type(lat)}, Longitude type: {type(long)}, Altitude type: {type(alt)}")
         print(f"Latitude: {lat}, Longitude: {long}, Altitude: {alt}")
         return [
@@ -161,7 +164,7 @@ class Overhead:
                 self._processing = False
                 self._data = data
 
-        except (ConnectionError, NewConnectionError, MaxRetryError):
+        except (ConnectionError, NewConnectionError, MaxRetryError, RequestException):
             self._new_data = False
             self._processing = False
 
@@ -196,3 +199,4 @@ if __name__ == "__main__":
         sleep(1)
 
     print(o.data)
+
