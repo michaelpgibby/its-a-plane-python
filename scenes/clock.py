@@ -13,7 +13,7 @@ CLOCK_FONT = fonts.regular
 CLOCK_POSITION = (1, 8)
 # CLOCK_COLOUR = colours.BLUE_DARK
 CLOCK_COLOUR = COLORS.get(CLOCK_COLOR, COLORS['WHITE'])
-print(f"CLOCK_COLOR: {CLOCK_COLOR}")
+
 
 class ClockScene(object):
     def __init__(self):
