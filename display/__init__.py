@@ -105,7 +105,6 @@ class Display(
         self.overhead.grab_data()
 
         # Initialize color attributes
-        self._airport_colour = AIRPORT_COLOR
         self._arrow_colour = ARROW_COLOR
         self._plane_details_colour = PLANE_DETAILS_COLOR
         self._clock_colour = CLOCK_COLOR
