@@ -8,7 +8,6 @@
     "LOCATION_HOME_altitude": 0.01781,
     "WEATHER_LOCATION": "Orlando",
     "OPENWEATHER_API_KEY": "60c45e52b50fd3b15390ff4f2887ab38",
-    # "TEMPERATURE_UNITS": "imperial",
     "MIN_ALTITUDE": 0,
     "BRIGHTNESS": 100,
     "GPIO_SLOWDOWN": 0,
