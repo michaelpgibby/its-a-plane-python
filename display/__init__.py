@@ -53,7 +53,7 @@ class Display(
     WeatherScene,
     FlightDetailsScene,
     JourneyScene,
-    LoadingLEDScene if LOADING_LED_ENABLED else LoadingPulseScene,
+    LoadingLEDScene if LOADING_LED_ENABLED else LoadingPulseScene ,
     PlaneDetailsScene,
     ClockScene,
     DayScene,
