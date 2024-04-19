@@ -1,4 +1,4 @@
- from datetime import datetime
+from datetime import datetime
 
 from utilities.animator import Animator
 from setup import colours, fonts, frames
