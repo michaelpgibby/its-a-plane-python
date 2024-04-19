@@ -21,10 +21,14 @@ def update_config():
         new_config = request.form.to_dict()
 
         # Ensure integer values for specific keys
-        int_keys = ['MIN_ALTITUDE', 'GPIO_SLOWDOWN', 'BRIGHTNESS']
+        int_keys = ['MIN_ALTITUDE', 'GPIO_SLOWDOWN', 'BRIGHTNESS', 'LATITUDE', 'LONGITUDE']
         for key in int_keys:
             if key in new_config:
-                new_config[key] = int(new_config[key])
+                try:
+                    new_config[key] = int(float(new_config[key]))  # Convert to float first to handle values like '-81.234403'
+                except ValueError:
+                    # Handle invalid input gracefully
+                    pass
 
         # Update the config_data dictionary with the new values
         config_data.update(new_config)
