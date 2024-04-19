@@ -6,7 +6,7 @@ from setup.colours import COLORS
 
 # from config import CLOCK_COLOR
 
-with open('web_config.json', 'r') as config_file
+with open('web_config.json', 'r') as config_file:
     config_data = json.load(config_file)
 
 from rgbmatrix import graphics
