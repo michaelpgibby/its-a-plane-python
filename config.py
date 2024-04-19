@@ -30,8 +30,17 @@ COLORS_MAP = {
 
 }
 
-ZONE_HOME = config_data['ZONE_HOME']
-LOCATION_HOME = config_data['LOCATION_HOME']
+ZONE_HOME = {
+    "tl_y": config_data['ZONE_HOME_tl_y'], # Top-Left Latitude (deg)
+    "tl_x": config_data['ZONE_HOME_tl_x'], # Top-Left Longitude (deg)
+    "br_y": config_data['ZONE_HOME_br_y'], # Bottom-Right Latitude (deg)
+    "br_x": config_data['ZONE_HOME_br_x'] # Bottom-Right Longitude (deg)
+}
+LOCATION_HOME = [
+    config_data['LOCATION_HOME_latitude'], # Latitude (deg)
+    config_data['LOCATION_HOME_longitude'], # Longitude (deg)
+    config_data['LOCATION_HOME_altitude'] # Altitude (km)
+]
 WEATHER_LOCATION = config_data['WEATHER_LOCATION']
 OPENWEATHER_API_KEY = config_data['OPENWEATHER_API_KEY']
 TEMPERATURE_UNITS = config_data['TEMPERATURE_UNITS']
