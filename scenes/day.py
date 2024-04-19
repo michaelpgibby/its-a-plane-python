@@ -8,7 +8,7 @@ from config import DAY_COLOR
 from rgbmatrix import graphics
 
 # Setup
-#DAY_COLOUR = colours.PINK_DARK
+# DAY_COLOUR = colours.PINK_DARK
 DAY_COLOUR = COLORS.get(DAY_COLOR, COLORS['WHITE'])
 DAY_FONT = fonts.small
 DAY_POSITION = (2, 23)
@@ -31,7 +31,7 @@ class DayScene(object):
             now = datetime.now()
             current_day = now.strftime("%A")
 
-            # Only draw if time needs updated
+            # Only draw if day needs updated
             if self._last_day != current_day:
                 # Undraw last day if different from current
                 if not self._last_day is None:
