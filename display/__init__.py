@@ -13,7 +13,7 @@ from scenes.clock import ClockScene
 from scenes.planedetails import PlaneDetailsScene
 from scenes.day import DayScene
 from scenes.date import DateScene
-from config import (RGB_SEQUENCE, AIRPORT_COLOR,
+from config import (RGB_SEQUENCE,
     ARROW_COLOR,
     PLANE_DETAILS_COLOR,
     CLOCK_COLOR,
@@ -23,7 +23,7 @@ from config import (RGB_SEQUENCE, AIRPORT_COLOR,
     FLIGHT_NUMBER_NUMERIC_COLOR,
     DIVIDING_BAR_COLOR,
     DATA_INDEX_COLOR,
-    JOURNEY_COLOR,
+    JOURNEY_COLOR
 )
 
 from rgbmatrix import graphics
