@@ -232,7 +232,7 @@ class WeatherScene(object):
                 self.canvas,
                 TEMPERATURE_FONT,
                 TEMPERATURE_POSITION[0],
-                TEMPERATURE_POSITION[1] + TEMPERATURE_FONT_HEIGHT + 1,
+                TEMPERATURE_POSITION[1] + TEMPERATURE_FONT_HEIGHT + 2,
                 temp_colour,
                 temp_str_c,
             )
