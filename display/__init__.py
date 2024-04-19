@@ -13,8 +13,7 @@ from scenes.clock import ClockScene
 from scenes.planedetails import PlaneDetailsScene
 from scenes.day import DayScene
 from scenes.date import DateScene
-from config import RGB_SEQUENCE, ARROW_COLOR, PLANE_DETAILS_COLOR, CLOCK_COLOR, DATE_COLOR, DAY_COLOR, FLIGHT_NUMBER_ALPHA_COLOR, FLIGHT_NUMBER_NUMERIC_COLOR, DIVIDING_BAR_COLOR, DATA_INDEX_COLOR, JOURNEY_COLOR
-
+from config import RGB_SEQUENCE
 from rgbmatrix import graphics
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
@@ -93,17 +92,7 @@ class Display(
         self.overhead = Overhead()
         self.overhead.grab_data()
 
-        # Initialize color attributes
-        self._arrow_colour = ARROW_COLOR
-        self._plane_details_colour = PLANE_DETAILS_COLOR
-        self._clock_colour = CLOCK_COLOR
-        self._date_colour = DATE_COLOR
-        self._day_colour = DAY_COLOR
-        self._flight_number_alpha_colour = FLIGHT_NUMBER_ALPHA_COLOR
-        self._flight_number_numeric_colour = FLIGHT_NUMBER_NUMERIC_COLOR
-        self._dividing_bar_colour = DIVIDING_BAR_COLOR
-        self._data_index_colour = DATA_INDEX_COLOR
-        self._journey_colour = JOURNEY_COLOR
+       
 
         # Initalise animator and scenes
         super().__init__()
