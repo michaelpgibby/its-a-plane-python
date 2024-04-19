@@ -8,9 +8,19 @@ from rgbmatrix import graphics
 from utilities.animator import Animator
 from setup import colours, fonts, frames
 from setup.colours import COLORS
-from config import WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS, RAINFALL_ENABLED, RAINFALL_HOURS, \
-    RAINFAILL_12HR_MARKERS, RAINFALL_GRAPH_ORIGIN, RAINFALL_COLUMN_WIDTH, RAINFALL_GRAPH_HEIGHT, RAINFALL_MAX_VALUE, \
-    RAINFALL_OVERSPILL_FLASH_ENABLED
+from config import (
+    WEATHER_LOCATION,
+    OPENWEATHER_API_KEY,
+    TEMPERATURE_UNITS,
+    RAINFALL_ENABLED,
+    RAINFALL_HOURS,
+    RAINFAILL_12HR_MARKERS,
+    RAINFALL_GRAPH_ORIGIN,
+    RAINFALL_COLUMN_WIDTH,
+    RAINFALL_GRAPH_HEIGHT,
+    RAINFALL_MAX_VALUE,
+    RAINFALL_OVERSPILL_FLASH_ENABLED,
+)
 
 TEMPERATURE_COLOURS = (
     (0, COLORS['WHITE']),
@@ -25,15 +35,12 @@ RAINFALL_GRAPH_ORIGIN = (39, 15)
 RAINFALL_COLUMN_WIDTH = 1
 RAINFALL_GRAPH_HEIGHT = 8
 RAINFALL_MAX_VALUE = 3
-TEMPERATURE_FONT_HEIGHT =  5
+TEMPERATURE_FONT_HEIGHT = 5
 TEMPERATURE_POSITION = (48, TEMPERATURE_FONT_HEIGHT + 1)
 RAINFALL_REFRESH_SECONDS = 380
 TEMPERATURE_REFRESH_SECONDS = 60
 RAINFALL_HOURS = 24
 RAINFALL_OVERSPILL_FLASH_ENABLED = True
-
-
-
 
 # Weather API
 WEATHER_API_URL = "https://taps-aff.co.uk/api/"
@@ -278,22 +285,22 @@ class WeatherScene(object):
     @Animator.KeyFrame.add(frames.PER_SECOND * 1)
     def temperature(self, count):
         if len(self._data):
-        # Don't draw if there's plane data
+            # Don't draw if there's plane data
             return
 
         if not (count % TEMPERATURE_REFRESH_SECONDS):
 
             if OPENWEATHER_API_KEY:
-            self.current_temperature = grab_current_temperature_openweather(
-                WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS
+                self.current_temperature = grab_current_temperature_openweather(
+                    WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS
                 )
             else:
-            self.current_temperature = grab_current_temperature(
-                WEATHER_LOCATION, TEMPERATURE_UNITS
+                self.current_temperature = grab_current_temperature(
+                    WEATHER_LOCATION, TEMPERATURE_UNITS
                 )
 
         if self._last_temperature_str is not None:
-        # Undraw old temperature
+            # Undraw old temperature
             _ = graphics.DrawText(
                 self.canvas,
                 TEMPERATURE_FONT,
