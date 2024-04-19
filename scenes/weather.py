@@ -275,8 +275,8 @@ class WeatherScene(object):
             )
             self._last_upcoming_rain_and_temp = self.upcoming_rain_and_temp.copy()
 
-   @Animator.KeyFrame.add(frames.PER_SECOND * 1)
-def temperature(self, count):
+    @Animator.KeyFrame.add(frames.PER_SECOND * 1)
+    def temperature(self, count):
     if len(self._data):
         # Don't draw if there's plane data
         return
