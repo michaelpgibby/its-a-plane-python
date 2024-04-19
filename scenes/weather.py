@@ -11,7 +11,6 @@ from setup.colours import COLORS
 from config import (
     WEATHER_LOCATION,
     OPENWEATHER_API_KEY,
-    # TEMPERATURE_UNITS,
     RAINFALL_ENABLED,
     RAINFALL_HOURS,
     RAINFAILL_12HR_MARKERS,
@@ -30,7 +29,7 @@ TEMPERATURE_COLOURS = (
     (30, COLORS['ORANGE']),
 )
 
-RAINFAILL_12HR_MARKERS = True
+RAINFALL_12HR_MARKERS = True
 RAINFALL_GRAPH_ORIGIN = (39, 15)
 RAINFALL_COLUMN_WIDTH = 1
 RAINFALL_GRAPH_HEIGHT = 8
@@ -41,7 +40,7 @@ RAINFALL_REFRESH_SECONDS = 380
 TEMPERATURE_REFRESH_SECONDS = 60
 RAINFALL_HOURS = 24
 RAINFALL_OVERSPILL_FLASH_ENABLED = True
-TEMPERATURE_UNITS = "metric"
+TEMPERATURE_UNITS = 'metric'  # Set to 'metric' for Celsius
 
 # Weather API
 WEATHER_API_URL = "https://taps-aff.co.uk/api/"
@@ -139,7 +138,8 @@ class WeatherScene(object):
     def __init__(self):
         super().__init__()
         self._last_upcoming_rain_and_temp = None
-        self._last_temperature_str = None
+        self._last_temperature_str_f = None
+        self._last_temperature_str_c = None
 
     def colour_gradient(self, colour_A, colour_B, ratio):
         return graphics.Color(
@@ -176,113 +176,6 @@ class WeatherScene(object):
 
         return temp_colour
 
-    def draw_rainfall_and_temperature(
-        self, rainfall_and_temperature, graph_colour=None, flash_enabled=False
-    ):
-        columns = range(
-            0, RAINFALL_HOURS * RAINFALL_COLUMN_WIDTH, RAINFALL_COLUMN_WIDTH
-        )
-
-        i = 0
-
-        # Draw hours
-        for data, column_x in zip(rainfall_and_temperature, columns):
-            rain_height = int(
-                ceil(data["precip_mm"] * (RAINFALL_GRAPH_HEIGHT / RAINFALL_MAX_VALUE))
-            )
-
-            if rain_height > RAINFALL_GRAPH_HEIGHT:
-                # Any over-spill, flash some pixels
-                flash_height = rain_height - RAINFALL_GRAPH_HEIGHT
-
-                if flash_height > RAINFALL_GRAPH_HEIGHT:
-                    flash_height = (
-                        RAINFALL_GRAPH_HEIGHT + 1
-                    )  # +1 to also draw over x-axis
-
-                # Clip over-spill
-                rain_height = RAINFALL_GRAPH_HEIGHT
-            else:
-                flash_height = 0
-
-            if RAINFAILL_12HR_MARKERS:
-                hourly_marker = data["hour"] in (0, 12)
-            else:
-                hourly_marker = False
-
-            x1 = RAINFALL_GRAPH_ORIGIN[0] + column_x
-            x2 = x1 + RAINFALL_COLUMN_WIDTH
-            y1 = RAINFALL_GRAPH_ORIGIN[1] + (1 if hourly_marker else 0)
-            y2 = RAINFALL_GRAPH_ORIGIN[1] - rain_height
-
-            if graph_colour is None:
-                square_colour = self.temperature_to_colour(data["temp_c"])
-            else:
-                flash_height = 0
-                square_colour = graph_colour
-
-            self.draw_square(x1, y1, x2, y2, square_colour)
-
-            # Make any over-spill flash
-            if flash_height and flash_enabled:
-                x1 = RAINFALL_GRAPH_ORIGIN[0] + column_x
-                x2 = x1 + RAINFALL_COLUMN_WIDTH
-                y1 = RAINFALL_GRAPH_ORIGIN[1] - RAINFALL_GRAPH_HEIGHT
-                y2 = y1 + flash_height - 1
-
-                self.draw_square(x1, y1, x2, y2, COLORS["BLACK"])
-
-    @Animator.KeyFrame.add(frames.PER_SECOND * 1)
-    def rainfall(self, count):
-
-        if not RAINFALL_ENABLED:
-            return
-
-        if not (count % TEMPERATURE_REFRESH_SECONDS):
-
-            if OPENWEATHER_API_KEY:
-                self.current_temperature = grab_current_temperature_openweather(
-                    WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS
-                )
-            else:
-                self.current_temperature = grab_current_temperature(
-                    WEATHER_LOCATION, TEMPERATURE_UNITS
-                )
-
-        if len(self._data):
-            # Don't draw if there's plane data
-            # and force a redraw when this is visible
-            # again by clearing the previous drawn data
-            # forcing a complete redraw
-            self._last_upcoming_rain_and_temp = None
-
-            # Don't draw anything
-            return
-
-        if not (count % RAINFALL_REFRESH_SECONDS):
-            self.upcoming_rain_and_temp = grab_upcoming_rainfall_and_temperature(
-                WEATHER_LOCATION, RAINFALL_HOURS
-            )
-
-        # Test for drawing rainfall if data is available
-        if not self._last_upcoming_rain_and_temp == self.upcoming_rain_and_temp:
-            if self._last_upcoming_rain_and_temp is not None:
-                # Undraw previous graph
-                self.draw_rainfall_and_temperature(
-                    self._last_upcoming_rain_and_temp, COLORS["BLACK"]
-                )
-
-        if self.upcoming_rain_and_temp:
-            # Draw new graph
-            flash_enabled = (
-                True if RAINFALL_OVERSPILL_FLASH_ENABLED and (count % 2) else False
-            )
-
-            self.draw_rainfall_and_temperature(
-                self.upcoming_rain_and_temp, flash_enabled=flash_enabled
-            )
-            self._last_upcoming_rain_and_temp = self.upcoming_rain_and_temp.copy()
-
     @Animator.KeyFrame.add(frames.PER_SECOND * 1)
     def temperature(self, count):
         if len(self._data):
@@ -290,7 +183,6 @@ class WeatherScene(object):
             return
 
         if not (count % TEMPERATURE_REFRESH_SECONDS):
-
             if OPENWEATHER_API_KEY:
                 self.current_temperature = grab_current_temperature_openweather(
                     WEATHER_LOCATION, OPENWEATHER_API_KEY, TEMPERATURE_UNITS
@@ -300,37 +192,30 @@ class WeatherScene(object):
                     WEATHER_LOCATION, TEMPERATURE_UNITS
                 )
 
-        if self._last_temperature_str is not None:
-            # Undraw old temperature
+        if self._last_temperature_str_f is not None:
+            # Undraw old temperatures
             _ = graphics.DrawText(
                 self.canvas,
                 TEMPERATURE_FONT,
                 TEMPERATURE_POSITION[0],
                 TEMPERATURE_POSITION[1],
                 COLORS["BLACK"],
-                self._last_temperature_str,
+                self._last_temperature_str_f,
             )
-
-        if self.current_temperature:
-            # Calculate Celsius temperature
-            temp_celsius = round((self.current_temperature - 32) / 1.8)
-
-            # Format Celsius temperature as string with degrees symbol
-            temp_str_c = f"{temp_celsius}°C".rjust(4, " ")
-
-            temp_str_f = f"{round(self.current_temperature * 9 / 5 + 32)}°F".rjust(4, " ")
-
-            temp_colour = self.temperature_to_colour(self.current_temperature)
-
-            # Draw temperature in Celsius
             _ = graphics.DrawText(
                 self.canvas,
                 TEMPERATURE_FONT,
                 TEMPERATURE_POSITION[0],
                 TEMPERATURE_POSITION[1] + TEMPERATURE_FONT_HEIGHT + 1,
-                temp_colour,
-                temp_str_c,
+                COLORS["BLACK"],
+                self._last_temperature_str_c,
             )
+
+        if self.current_temperature:
+            temp_str_f = f"{round(self.current_temperature)}°F".rjust(4, " ")
+            temp_str_c = f"{round((self.current_temperature - 32) / 1.8)}°C".rjust(4, " ")
+
+            temp_colour = self.temperature_to_colour(self.current_temperature)
 
             # Draw temperature in Fahrenheit
             _ = graphics.DrawText(
@@ -342,4 +227,18 @@ class WeatherScene(object):
                 temp_str_f,
             )
 
-            self._last_temperature_str = temp_str_c  # Or temp_str_f, depending on your preference
+            # Draw temperature in Celsius
+            _ = graphics.DrawText(
+                self.canvas,
+                TEMPERATURE_FONT,
+                TEMPERATURE_POSITION[0],
+                TEMPERATURE_POSITION[1] + TEMPERATURE_FONT_HEIGHT + 1,
+                temp_colour,
+                temp_str_c,
+            )
+
+            self._last_temperature_str_f = temp_str_f
+            self._last_temperature_str_c = temp_str_c
+
+    # Other methods here...
+
