@@ -43,6 +43,11 @@ def distance_from_flight_to_home(flight, home=LOCATION_DEFAULT):
             alt * math.sin(DEG2RAD * lat),
             alt * math.cos(DEG2RAD * lat) * math.cos(DEG2RAD * long),
         ]
+    if not isinstance(flight[2], (int, float)):
+            raise ValueError("Altitude must be a single numerical value")
+
+    (x, y, z) = polar_to_cartesian(*flight)
+    return math.sqrt(x**2 + y**2 + z**2)
 
     def feet_to_meters_plus_earth(altitude_ft):
         altitude_km = 0.0003048 * altitude_ft
