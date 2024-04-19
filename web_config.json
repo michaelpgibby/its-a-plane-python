@@ -26,6 +26,7 @@
     "DIVIDING_BAR_COLOR": "BLUE",
     "DATA_INDEX_COLOR": "GREY",
     "JOURNEY_COLOR": "YELLOW",
-    "RAINFALL_ENABLED": false
+    "RAINFALL_ENABLED": false,
+    "RGB_SEQUENCE": "RBG"
 
 }
