@@ -312,8 +312,13 @@ class WeatherScene(object):
             )
 
         if self.current_temperature:
-            temp_str_c = f"{round((self.current_temperature - 32) / 1.8)}°".rjust(4, " ")
-            temp_str_f = f"{round(self.current_temperature * 9 / 5 + 32)}°".rjust(4, " ")
+            # Calculate Celsius temperature
+            temp_celsius = round((self.current_temperature - 32) / 1.8)
+
+            # Format Celsius temperature as string with degrees symbol
+            temp_str_c = f"{temp_celsius}°C".rjust(4, " ")
+
+            temp_str_f = f"{round(self.current_temperature * 9 / 5 + 32)}°F".rjust(4, " ")
 
             temp_colour = self.temperature_to_colour(self.current_temperature)
 
