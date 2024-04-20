@@ -12,7 +12,7 @@ from rgbmatrix import graphics
 CLOCK_FONT = fonts.regular
 CLOCK_POSITION = (1, 8)
 # CLOCK_COLOUR = colours.BLUE_DARK
-CLOCK_COLOUR = COLORS.get(CLOCK_COLOR, COLORS['WHITE'])
+CLOCK_COLOUR = COLORS.get(CLOCK_COLOR, COLORS['BLUE_DARK'])
 
 
 class ClockScene(object):
