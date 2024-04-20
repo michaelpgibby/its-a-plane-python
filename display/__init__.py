@@ -15,7 +15,6 @@ from scenes.day import DayScene
 from scenes.date import DateScene
 from config import RGB_SEQUENCE
 
-
 from rgbmatrix import graphics
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 
