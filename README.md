@@ -16,6 +16,10 @@
 7. Find your IP Address, and go to that IP address, :5000, if your IP is 192.168.0.107, you would go to 192.168.0.107:5000, to update configurations. After saving, reboot by turning power off then on. 
 8. Run `sudo python3 planes.py`.
 
+If all goes well, run this from SSH:  chmod +x check_processes.sh
+then add the file below by running crontab -e and pasting this at the bottom 
+*/2 * * * * /path/to/planes/check_processes.sh >/dev/null 2>&1
+
 
 ## Configuration
 In the root of the repo create a files `config.py` with the settings for your display.
