@@ -7,7 +7,7 @@
 # Setup
 
 ## Installation
-1. Install softare on your Pi and after logging in via SSH, run sudo apt update and sudo apt upgrade. 
+1. Install softare on your Pi and after logging in via SSH, run sudo apt update and sudo apt upgrade, if you have issues with sudo apt upgrade timing out on the changelogs, run sudo nano /etc/dphys-swapfile and change the swapfile size to 512 or 1024, ctrl s to save and ctrl x to exit, then reboot. 
 2.  Assemble the RGB matrix, Pi, and Bonnet as described in [this Adafruit guide](https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/overview). 
 3. When complete, install the LED-matrix (rgbmatrix) python library, again as described in the [Adafruit installation guide](https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/driving-matrices).
 4. It is assumed the [solder bridge is added to the HAT](https://learn.adafruit.com/assets/57727) in order to use the Pi's soundcard to drive the device's PWM
