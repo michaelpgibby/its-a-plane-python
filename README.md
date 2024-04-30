@@ -12,7 +12,8 @@
 3. When complete, install the LED-matrix (rgbmatrix) python library, again as described in the [Adafruit installation guide](https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/driving-matrices).
 4. It is assumed the [solder bridge is added to the HAT](https://learn.adafruit.com/assets/57727) in order to use the Pi's soundcard to drive the device's PWM
 5. Clone this repository (`git clone https://github.com/michaelpgibby/planes`). 
-6. Install the FlightRadarAPI dependency (`sudo pip3 install FlightRadarAPI` or 'sudo apt install python3-FlightRadarAPI'). Note - running with `sudo` is required as `rgbmatrix` [must be run as as root](https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python#using-the-library) for best performance.
+6. Install the FlightRadarAPI dependency (`sudo pip3 install FlightRadarAPI` or sudo pip3 install --break-system-packages FlightRadarAPI
+). Note - running with `sudo` is required as `rgbmatrix` [must be run as as root](https://github.com/hzeller/rpi-rgb-led-matrix/tree/master/bindings/python#using-the-library) for best performance.
 7. Go to the planes repo folder `cd /home/pi/planes` remember that pi will be your username (or wherever you cloned it to). 
 8. Find your IP Address, and go to that IP address, :5000, if your IP is 192.168.0.107, you would go to 192.168.0.107:5000, to update configurations. After saving, reboot by turning power off then on. 
 9. Run `sudo python3 planes.py`.
