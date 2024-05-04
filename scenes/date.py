@@ -9,7 +9,7 @@ from rgbmatrix import graphics
 
 # Setup
 #DATE_COLOUR = colours.PINK_DARKER
-DATE_COLOUR = COLORS.get(DATE_COLOR, COLORS['PINK_DARKER'])
+DATE_COLOUR = COLORS.get(DATE_COLOR, COLORS['GREEN'])
 DATE_FONT = fonts.small
 DATE_POSITION = (1, 31)
 
